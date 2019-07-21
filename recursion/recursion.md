@@ -9,10 +9,18 @@
     - 0! = 1
     - n! = (n - 1)! * n với n != 0
 
+## Bài toán đệ quy:
+Bài toán đệ quy là bài toán có thể được giải bằng cách giải một bài toán con (bài toán tương tự nhưng có tham số nhỏ hơn). Ví dụ:
+- Để tính được tổng từ nguyên 1 đến n ta có thể tính thông qua bài toán nhỏ hơn của nó: tổng từ 1 đến n - 1
+- Để tính được n! ta có thể tính thông qua bài toán nhỏ hơn của nó: (n - 1)!
+
+Mọi bài toán đệ quy cần một bài toán con gốc để có thể giải được, ví dụ:
+- Tổng các số nguyên từ 1 đến 1 là 1 (bài toán với n = 1)
+- 0! = 1 (bài toán với n = 0)
+
+## Đệ quy trong lập trình
 - Đệ quy cũng là một quy chuẩn cú pháp của các ngôn ngữ lập trình bậc cao, cho phép gọi một hàm ngay trong hàm đó (định nghĩa hàm này bằng chính hàm đó)
 
-## Bài toán đệ quy:
-Bài toán đệ quy
 
 ## Ví dụ về hàm đệ quy:
 Sử dụng định nghĩa vừa rồi của giai thừa, ta có thể lập trình hàm viết phép tính giai thừa như sau:
