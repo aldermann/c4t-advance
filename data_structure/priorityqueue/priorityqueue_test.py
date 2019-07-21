@@ -1,0 +1,127 @@
+from priorityqueue import PriorityQueue, QueueItem
+
+item = QueueItem("A", 1)
+assert(item is not None)
+assert(hasattr(item, "content"))
+assert(hasattr(item, "priority"))
+assert(item.content == "A")
+assert(item.priority == 1)
+
+q = PriorityQueue()
+assert(q is not None)
+assert(hasattr(q, "items"))
+assert(hasattr(q, "insert"))
+assert(hasattr(q, "delete"))
+assert(hasattr(q, "is_empty"))
+
+# A,1 B,2 C,3 D,4 E,5, F,6, G,7
+q.insert("C", 3)
+assert(len(q.items) == 1)
+assert(q.items[0].priority == 3)
+assert(q.items[0].content == "C")
+assert(str(q) == "(C,3)")
+
+item = q.delete()
+assert(item.priority == 3)
+assert(item.content == "C")
+assert(len(q.items) == 0)
+assert(str(q) == "<<E>>")
+
+q.insert("C", 3)
+assert(len(q.items) == 1)
+assert(q.items[0].priority == 3)
+assert(q.items[0].content == "C")
+
+q.insert("B", 2)
+assert(len(q.items) == 2)
+assert(q.items[0].priority == 2)
+assert(q.items[0].content == "B")
+assert(q.items[1].priority == 3)
+assert(q.items[1].content == "C")
+assert(str(q) == "(B,2)(C,3)")
+
+q.insert("E", 5)
+assert(len(q.items) == 3)
+assert(q.items[0].priority == 2)
+assert(q.items[0].content == "B")
+assert(q.items[1].priority == 3)
+assert(q.items[1].content == "C")
+assert(q.items[2].priority == 5)
+assert(q.items[2].content == "E")
+assert(str(q) == "(B,2)(C,3)(E,5)")
+
+
+q.insert("G", 7)
+assert(len(q.items) == 4)
+assert(q.items[0].priority == 2)
+assert(q.items[0].content == "B")
+assert(q.items[1].priority == 3)
+assert(q.items[1].content == "C")
+assert(q.items[2].priority == 5)
+assert(q.items[2].content == "E")
+assert(q.items[3].priority == 7)
+assert(q.items[3].content == "G")
+assert(str(q) == "(B,2)(C,3)(E,5)(G,7)")
+
+q.insert("D", 4)
+assert(len(q.items) == 5)
+assert(str(q) == "(B,2)(C,3)(E,5)(G,7)(D,4)")
+
+q.insert("A", 1)
+assert(len(q.items) == 6)
+assert(str(q) == "(A,1)(C,3)(B,2)(G,7)(D,4)(E,5)")
+
+q.insert("F", 6)
+assert(len(q.items) == 7)
+assert(str(q) == "(A,1)(C,3)(B,2)(G,7)(D,4)(E,5)(F,6)")
+
+#(A,1)(B,2)(D,4)(C,3)(G,7)(E,5)(F,6)
+
+# # (F,6)(D,4)(E,5)(B,2)(C,3)(A,1)
+
+item = q.delete()
+assert(item.priority == 1)
+assert(item.content == "A")
+assert(len(q.items) == 6)
+assert(str(q) == "(B,2)(C,3)(E,5)(G,7)(D,4)(F,6)")
+
+item = q.delete()
+assert(item.priority == 2)
+assert(item.content == "B")
+assert(len(q.items) == 5)
+assert(str(q) == "(C,3)(D,4)(E,5)(G,7)(F,6)")
+
+item = q.delete()
+assert(item.priority == 3)
+assert(item.content == "C")
+assert(len(q.items) == 4)
+assert(str(q) == "(D,4)(F,6)(E,5)(G,7)")
+
+item = q.delete()
+assert(item.priority == 4)
+assert(item.content == "D")
+assert(len(q.items) == 3)
+assert(str(q) == "(E,5)(F,6)(G,7)")
+
+item = q.delete()
+assert(item.priority == 5)
+assert(item.content == "E")
+assert(len(q.items) == 2)
+assert(str(q) == "(F,6)(G,7)")
+
+item = q.delete()
+assert(item.priority == 6)
+assert(item.content == "F")
+assert(len(q.items) == 1)
+assert(str(q) == "(G,7)")
+
+item = q.delete()
+assert(item.priority == 7)
+assert(item.content == "G")
+assert(len(q.items) == 0)
+assert(str(q) == "<<E>>")
+
+item = q.delete()
+assert(item is None)
+assert(len(q.items) == 0)
+assert(str(q) == "<<E>>")
