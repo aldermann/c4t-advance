@@ -16,18 +16,18 @@ assert(s.__str__() == "5")
 
 s.push(7)
 assert(not s.is_empty())
-assert(s.peek() == "7")
+assert(s.peek() == 7)
 assert(s.__str__() == "5 7")
 
 s.push(-1)
 assert(not s.is_empty())
-assert(s.peek() == "-1")
+assert(s.peek() == -1)
 assert(s.__str__() == "5 7 -1")
 
 x = s.pop()
 assert(not s.is_empty())
 assert(s.__str__() == "5 7")
-assert(s.peek() == "7")
+assert(s.peek() == 7)
 assert(x == -1)
 
 x = s.pop()
@@ -60,3 +60,4 @@ s.clear()
 assert(s.__str__() == "")
 assert(s.is_empty())
 
+print("you passed the test")
