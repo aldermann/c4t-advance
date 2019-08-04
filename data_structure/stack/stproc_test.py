@@ -2,30 +2,47 @@ from stproc import StringProcessor
 
 proc = StringProcessor()
 
-assert hasattr(proc, "__init__"), "there are attribute(s) unimplemented"
-assert hasattr(proc, "stack"), "there are attribute(s) unimplemented"
-assert hasattr(proc, "reverse"), "there are attribute(s) unimplemented"
-assert hasattr(proc, "process_sequence"), "there are attribute(s) unimplemented"
-assert hasattr(proc, "binary_string"), "there are attribute(s) unimplemented"
-assert hasattr(proc, "is_balanced"), "there are attribute(s) unimplemented"
+assert hasattr(proc, "__init__"), "__init__ method not implemented"
+assert hasattr(proc, "stack"), "stack property not found"
 
-print("testing reverse method")
-assert proc.reverse("abcdef") == "fedcba", "reverse method not working correctly"
-assert proc.reverse("abccba") == "abccba", "reverse method not working correctly"
+point = 0
+passed = 0
 
-print("testing process_sequence method")
-assert proc.process_sequence("ab*de*abcdef") == "adabcdef", "wrong answer"
-assert proc.process_sequence("d*e*f*g*") == "", "wrong answer"
-assert proc.process_sequence("d****ef") == "ef", "wrong answer"
 
-print("testing binary_string method")
-assert proc.binary_string(124) == "1111100", "wrong answer"
-assert proc.binary_string(10) == "1010", "wrong answer"
+if hasattr(proc, "reverse"):
+    print("Testing reverse method")
+    if proc.reverse("abcdef") == "fedcba":
+        point += 1
+    if proc.reverse("abccba") == "abccba":
+        point += 1
+if hasattr(proc, "process_sequence"):
+    print("testing process_sequence method")
+    if proc.process_sequence("ab*de*abcdef") == "adabcdef":
+        point += 2
+    if proc.process_sequence("d*e*f*g*") == "":
+        point += 2
+    if proc.process_sequence("d****ef") == "ef":
+        point += 2
 
-print("testing is_balanced method")
-assert proc.is_balanced("{{{}}}"), "wrong answer"
-assert not proc.is_balanced("{{{}"), "wrong answer"
-assert not proc.is_balanced("}}{{"), "wrong answer"
-assert proc.is_balanced("{{{}}{}{}}"), "wrong answer"
+if hasattr(proc, "is_balanced"):
+    print("testing is_balanced method")
+    if proc.is_balanced("{{{}}}"):
+        point += 3
+    if not proc.is_balanced("{{{}"):
+        point += 3
+    if not proc.is_balanced("}}{{"):
+        point += 3
+    if proc.is_balanced("{{{}}{}{}}"):
+        point += 3
 
-print("you passed the test")
+if hasattr(proc, "binary_string"):
+    print("testing binary_string method")
+    if proc.binary_string(124) == "1111100":
+        point += 4
+    if proc.binary_string(10) == "1010":
+        point += 4
+    if proc.binary_string(697) == "1010111001":
+        point += 4
+
+
+print(f"you passed the test with {point}/32 points")
